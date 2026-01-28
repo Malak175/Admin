@@ -1,0 +1,155 @@
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    
+    /* TABEEBAK Color System */
+    --background: 210 20% 98%;
+    --foreground: 214 97% 19%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 97% 19%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 97% 19%;
+
+    --primary: 218 100% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 211 100% 36%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 15% 95%;
+    --muted-foreground: 0 0% 44%;
+
+    --accent: 214 97% 19%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 0 0% 76%;
+    --input: 0 0% 76%;
+    --ring: 218 100% 32%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 214 97% 19%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 214 97% 19%;
+    --sidebar-accent: 218 100% 32%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 218 80% 25%;
+    --sidebar-ring: 0 0% 100%;
+
+    /* Chart colors */
+    --chart-1: 218 100% 32%;
+    --chart-2: 211 100% 36%;
+    --chart-3: 214 97% 19%;
+    --chart-4: 0 0% 44%;
+    --chart-5: 142 76% 36%;
+  }
+
+  .dark {
+    --background: 214 97% 10%;
+    --foreground: 210 20% 98%;
+
+    --card: 214 90% 14%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 214 90% 14%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 218 100% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 214 80% 18%;
+    --muted-foreground: 0 0% 76%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 60% 25%;
+    --input: 214 60% 25%;
+    --ring: 211 100% 50%;
+
+    --sidebar-background: 214 97% 8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 211 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 80% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 214 60% 20%;
+    --sidebar-ring: 211 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply bg-card rounded-xl p-6 shadow-sm border border-border/50 transition-all duration-200 hover:shadow-md hover:border-primary/20;
+  }
+
+  .table-container {
+    @apply bg-card rounded-xl border border-border/50 overflow-hidden;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-sidebar-foreground/70 transition-all duration-200 hover:bg-sidebar-accent hover:text-sidebar-foreground;
+  }
+
+  .sidebar-link-active {
+    @apply bg-sidebar-accent text-sidebar-foreground font-medium;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(218 100% 32%) 0%, hsl(211 100% 36%) 100%);
+  }
+
+  .gradient-dark {
+    background: linear-gradient(180deg, hsl(214 97% 19%) 0%, hsl(214 97% 12%) 100%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(218 100% 32%) 0%, hsl(211 100% 36%) 100%);
+  }
+}
