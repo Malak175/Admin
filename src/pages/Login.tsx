@@ -114,16 +114,6 @@ export default function Login() {
               </Button>
             </form>
 
-            {/* Demo credentials */}
-            <div className="mt-6 p-4 bg-muted rounded-lg">
-              <p className="text-sm font-medium text-muted-foreground mb-2">Demo Credentials:</p>
-              <p className="text-sm text-foreground">
-                Email: <code className="bg-background px-1.5 py-0.5 rounded">admin@tabeebak.com</code>
-              </p>
-              <p className="text-sm text-foreground">
-                Password: <code className="bg-background px-1.5 py-0.5 rounded">admin123</code>
-              </p>
-            </div>
           </CardContent>
         </Card>
       </div>
