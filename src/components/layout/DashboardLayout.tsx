@@ -21,7 +21,7 @@ import {
   X,
   LogOut,
   ChevronRight,
-  Bell,
+  
   Shield,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -135,11 +135,6 @@ export function DashboardLayout() {
 
           <div className="flex-1" />
 
-          {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-destructive" />
-          </Button>
 
           {/* User dropdown */}
           <DropdownMenu>
