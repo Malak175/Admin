@@ -90,57 +90,6 @@ export default function Settings() {
           <Button onClick={handleProfileSave}>Save Changes</Button>
         </CardContent>
       </Card>
-
-      {/* Notifications Section */}
-      <Card className="border-border/50">
-        <CardHeader>
-          <CardTitle className="text-lg">Notifications</CardTitle>
-          <CardDescription>
-            Configure how you receive notifications
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Email Notifications</p>
-              <p className="text-sm text-muted-foreground">
-                Receive email notifications for important updates
-              </p>
-            </div>
-            <Switch
-              checked={notifications.email}
-              onCheckedChange={() => handleNotificationChange('email')}
-            />
-          </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Push Notifications</p>
-              <p className="text-sm text-muted-foreground">
-                Receive push notifications in your browser
-              </p>
-            </div>
-            <Switch
-              checked={notifications.push}
-              onCheckedChange={() => handleNotificationChange('push')}
-            />
-          </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Product Updates</p>
-              <p className="text-sm text-muted-foreground">
-                Receive updates about new features and improvements
-              </p>
-            </div>
-            <Switch
-              checked={notifications.updates}
-              onCheckedChange={() => handleNotificationChange('updates')}
-            />
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Danger Zone */}
       <Card className="border-destructive/50">
         <CardHeader>
