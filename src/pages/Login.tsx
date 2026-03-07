@@ -36,7 +36,7 @@ export default function Login() {
       toast.success('Welcome back!');
       navigate(from, { replace: true });
     } else {
-      toast.error('Invalid credentials');
+      toast.error('Invalid credentials or login configuration');
     }
     
     setIsSubmitting(false);
@@ -97,7 +97,6 @@ export default function Login() {
                   </button>
                 </div>
               </div>
-
               <Button 
                 type="submit" 
                 className="w-full h-11 font-medium"
