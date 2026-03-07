@@ -10,6 +10,7 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import Doctors from "./pages/Doctors";
 import Laboratories from "./pages/Laboratories";
@@ -39,6 +40,7 @@ const App = () => (
               }
             >
               <Route index element={<Dashboard />} />
+              <Route path="requests" element={<Requests />} />
               <Route path="patients" element={<Patients />} />
               <Route path="doctors" element={<Doctors />} />
               <Route path="laboratories" element={<Laboratories />} />
