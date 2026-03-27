@@ -113,3 +113,28 @@ export interface CreateLabPayload {
   lat?: number;
   lng?: number;
 }
+
+export interface StaticPagesQuery {
+  page?: number;
+  limit?: number;
+}
+
+export interface StaticPagePayload {
+  slug: string;
+  title_en: string;
+  title_ar: string;
+  content_en: string;
+  content_ar: string;
+  meta_title_en: string;
+  meta_title_ar: string;
+  meta_description_en: string;
+  meta_description_ar: string;
+  is_active: boolean;
+}
+
+export interface StaticPage extends StaticPagePayload {
+  id?: number;
+  page_id?: number;
+  created_at?: string;
+  updated_at?: string;
+}

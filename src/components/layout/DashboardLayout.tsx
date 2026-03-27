@@ -24,6 +24,7 @@ import {
   ChevronRight,
   
   Shield,
+  FileText,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -34,6 +35,10 @@ const navigation = [
   { name: 'Doctors', href: '/dashboard/doctors', icon: Stethoscope },
   { name: 'Laboratories', href: '/dashboard/laboratories', icon: FlaskConical },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+];
+
+const staticContentNavigation = [
+  { name: 'Pages', href: '/dashboard/pages', icon: FileText },
 ];
 
 export function DashboardLayout() {
@@ -83,24 +88,49 @@ export function DashboardLayout() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setSidebarOpen(false)}
-                className={cn(
-                  'sidebar-link',
-                  isActive(item.href) && 'sidebar-link-active'
-                )}
-              >
-                <item.icon className="h-5 w-5" />
-                <span>{item.name}</span>
-                {isActive(item.href) && (
-                  <ChevronRight className="ml-auto h-4 w-4" />
-                )}
-              </Link>
-            ))}
+          <nav className="flex-1 px-4 py-6 space-y-6">
+            <div className="space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  className={cn(
+                    'sidebar-link',
+                    isActive(item.href) && 'sidebar-link-active'
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.name}</span>
+                  {isActive(item.href) && (
+                    <ChevronRight className="ml-auto h-4 w-4" />
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            <div className="space-y-1">
+              <p className="px-4 text-xs font-semibold uppercase tracking-wide text-sidebar-foreground/60">
+                Static Content
+              </p>
+              {staticContentNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  className={cn(
+                    'sidebar-link',
+                    isActive(item.href) && 'sidebar-link-active'
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.name}</span>
+                  {isActive(item.href) && (
+                    <ChevronRight className="ml-auto h-4 w-4" />
+                  )}
+                </Link>
+              ))}
+            </div>
           </nav>
 
           {/* User section */}

@@ -14,6 +14,9 @@ import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import Doctors from "./pages/Doctors";
 import Laboratories from "./pages/Laboratories";
+import Pages from "./pages/Pages";
+import PageCreate from "./pages/PageCreate";
+import PageEdit from "./pages/PageEdit";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -44,6 +47,9 @@ const App = () => (
               <Route path="patients" element={<Patients />} />
               <Route path="doctors" element={<Doctors />} />
               <Route path="laboratories" element={<Laboratories />} />
+              <Route path="pages" element={<Pages />} />
+              <Route path="pages/new" element={<PageCreate />} />
+              <Route path="pages/:id" element={<PageEdit />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 
