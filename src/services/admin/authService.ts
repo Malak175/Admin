@@ -19,7 +19,8 @@ function asRecord(value: unknown): UnknownRecord | null {
 
 function extractToken(payload: unknown): string | null {
   const obj = asRecord(payload);
-  const token = obj?.token;
+  const data = asRecord(obj?.data);
+  const token = obj?.token ?? data?.token;
   return typeof token === "string" ? token : null;
 }
 
@@ -41,7 +42,10 @@ function extractUserData(payload: unknown): AdminLoginResult["userData"] | undef
 
   const first = typeof user.first_name === "string" ? user.first_name : "";
   const last = typeof user.last_name === "string" ? user.last_name : "";
-  const fullName = `${first} ${last}`.trim();
+  const fullName =
+    typeof user.fullName === "string"
+      ? user.fullName
+      : `${first} ${last}`.trim();
 
   return {
     id: user.id ? String(user.id) : user.user_id ? String(user.user_id) : undefined,
@@ -56,7 +60,8 @@ function extractUserData(payload: unknown): AdminLoginResult["userData"] | undef
 }
 
 export async function loginAdmin(email: string, password: string): Promise<AdminLoginResult> {
-  const loginEndpoint = import.meta.env.VITE_ADMIN_LOGIN_ENDPOINT || "/auth/signin";
+  const loginEndpoint =
+    import.meta.env.VITE_ADMIN_LOGIN_ENDPOINT || "/api/v1/auth/signin";
 
   const { data } = await axiosInstance.post(loginEndpoint, { email, password });
   const token = extractToken(data);

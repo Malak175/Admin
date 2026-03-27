@@ -4,6 +4,8 @@ import { getAdminToken } from "@/services/api/tokenStorage";
 export const AUTH_EXPIRED_EVENT = "admin:auth-expired";
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || "/api";
+const adminLoginEndpoint =
+  import.meta.env.VITE_ADMIN_LOGIN_ENDPOINT || "/api/v1/auth/signin";
 
 export const axiosInstance = axios.create({
   baseURL,
@@ -14,7 +16,10 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = getAdminToken();
-  if (token) {
+  const url = config.url || "";
+  const isLoginRequest = url.includes(adminLoginEndpoint);
+
+  if (token && !isLoginRequest) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
