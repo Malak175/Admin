@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import {
   LayoutDashboard,
+  Inbox,
   Users,
   Stethoscope,
   FlaskConical,
@@ -28,6 +29,7 @@ import { cn } from '@/lib/utils';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Access Requests', href: '/dashboard/requests', icon: Inbox },
   { name: 'Patients', href: '/dashboard/patients', icon: Users },
   { name: 'Doctors', href: '/dashboard/doctors', icon: Stethoscope },
   { name: 'Laboratories', href: '/dashboard/laboratories', icon: FlaskConical },
