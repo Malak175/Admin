@@ -138,3 +138,30 @@ export interface StaticPage extends StaticPagePayload {
   created_at?: string;
   updated_at?: string;
 }
+
+export interface BannersQuery {
+  page?: number;
+  limit?: number;
+}
+
+export interface BannerPayload {
+  title_en: string;
+  title_ar: string;
+  description_en: string;
+  description_ar: string;
+  image_url: string;
+  placement: string;
+  action_type: string;
+  action_value: string;
+  is_active: boolean;
+  start_at?: string;
+  end_at?: string;
+  display_order: number;
+}
+
+export interface Banner extends BannerPayload {
+  id?: number;
+  banner_id?: number;
+  created_at?: string;
+  updated_at?: string;
+}

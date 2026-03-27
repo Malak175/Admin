@@ -25,6 +25,7 @@ import {
   
   Shield,
   FileText,
+  Image,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -39,6 +40,7 @@ const navigation = [
 
 const staticContentNavigation = [
   { name: 'Pages', href: '/dashboard/pages', icon: FileText },
+  { name: 'Banners', href: '/dashboard/banners', icon: Image },
 ];
 
 export function DashboardLayout() {
