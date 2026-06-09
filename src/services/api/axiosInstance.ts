@@ -3,7 +3,7 @@ import { getAdminToken } from "@/services/api/tokenStorage";
 
 export const AUTH_EXPIRED_EVENT = "admin:auth-expired";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || "/api";
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 const adminLoginEndpoint =
   import.meta.env.VITE_ADMIN_LOGIN_ENDPOINT || "/api/v1/auth/signin";
 

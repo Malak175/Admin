@@ -11,7 +11,7 @@ interface User {
   id: string;
   email: string;
   name: string;
-  role: "admin" | "manager" | "user";
+  role: string;
   avatar?: string;
 }
 
@@ -30,7 +30,7 @@ const DEFAULT_USER: User = {
   id: "1",
   email: "admin@tabeebak.com",
   name: "Admin User",
-  role: "admin",
+  role: "Admin",
 };
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -49,14 +49,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Check for existing session
     const storedUser = localStorage.getItem("admin_user");
     const storedToken = getAdminToken();
+    let nextToken: string | null = storedToken;
     if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-    }
-    if (storedToken && !storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser) as User;
+        if (parsedUser?.role === "Admin") {
+          setUser(parsedUser);
+        } else {
+          localStorage.removeItem("admin_user");
+          clearAdminToken();
+          nextToken = null;
+        }
+      } catch {
+        localStorage.removeItem("admin_user");
+        clearAdminToken();
+        nextToken = null;
+      }
+    } else if (storedToken) {
       setUser(DEFAULT_USER);
     }
-    if (storedToken) {
-      setToken(storedToken);
+    if (nextToken) {
+      setToken(nextToken);
     }
     setIsLoading(false);
   }, []);
@@ -81,15 +94,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       const result = await loginAdmin(email, password);
+      const userData = result.userData;
+      if (!userData || userData.role !== "Admin") {
+        return false;
+      }
       const newUser: User = {
-        id: result.userData?.id ?? DEFAULT_USER.id,
-        email: result.userData?.email ?? email,
-        name: result.userData?.name ?? DEFAULT_USER.name,
-        role:
-          result.userData?.role === "manager" || result.userData?.role === "user"
-            ? result.userData.role
-            : "admin",
-        avatar: result.userData?.avatar,
+        id: userData.id ?? DEFAULT_USER.id,
+        email: userData.email ?? email,
+        name: userData.name ?? DEFAULT_USER.name,
+        role: userData.role,
+        avatar: userData.avatar,
       };
 
       setUser(newUser);
@@ -109,7 +123,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         token,
-        isAuthenticated: !!user && !!token,
+        isAuthenticated: !!user && !!token && user.role === "Admin",
         isLoading,
         login,
         logout,

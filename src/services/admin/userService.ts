@@ -14,7 +14,7 @@ export async function listPatients(
 ): Promise<PaginatedResponse<PatientItem> & { include_inactive?: boolean }> {
   const { data } = await axiosInstance.get<
     PaginatedResponse<PatientItem> & { include_inactive?: boolean }
-  >("/admin/users/patients", { params: query });
+  >("/api/v1/admin/users/patients", { params: query });
   return data;
 }
 
@@ -23,7 +23,7 @@ export async function listDoctors(
 ): Promise<PaginatedResponse<DoctorItem> & { include_inactive?: boolean }> {
   const { data } = await axiosInstance.get<
     PaginatedResponse<DoctorItem> & { include_inactive?: boolean }
-  >("/admin/users/doctors", { params: query });
+  >("/api/v1/admin/users/doctors", { params: query });
   return data;
 }
 
@@ -31,54 +31,54 @@ export async function listLabs(
   query: UsersQuery
 ): Promise<PaginatedResponse<LabItem> & { include_inactive?: boolean }> {
   const { data } = await axiosInstance.get<PaginatedResponse<LabItem> & { include_inactive?: boolean }>(
-    "/admin/users/labs",
+    "/api/v1/admin/users/labs",
     { params: query }
   );
   return data;
 }
 
 export async function createDoctor(payload: CreateDoctorPayload) {
-  const { data } = await axiosInstance.post("/admin/users/doctors", payload);
+  const { data } = await axiosInstance.post("/api/v1/admin/users/doctors", payload);
   return data;
 }
 
 export async function createLab(payload: CreateLabPayload) {
-  const { data } = await axiosInstance.post("/admin/users/labs", payload);
+  const { data } = await axiosInstance.post("/api/v1/admin/users/labs", payload);
   return data;
 }
 
 export async function updatePatient(userId: number, payload: Partial<PatientItem>) {
-  const { data } = await axiosInstance.put(`/admin/users/patients/${userId}`, payload);
+  const { data } = await axiosInstance.put(`/api/v1/admin/users/patients/${userId}`, payload);
   return data;
 }
 
 export async function updateDoctor(userId: number, payload: Partial<DoctorItem>) {
-  const { data } = await axiosInstance.put(`/admin/users/doctors/${userId}`, payload);
+  const { data } = await axiosInstance.put(`/api/v1/admin/users/doctors/${userId}`, payload);
   return data;
 }
 
 export async function updateLab(userId: number, payload: Partial<LabItem>) {
-  const { data } = await axiosInstance.put(`/admin/users/labs/${userId}`, payload);
+  const { data } = await axiosInstance.put(`/api/v1/admin/users/labs/${userId}`, payload);
   return data;
 }
 
 export async function disablePatient(userId: number): Promise<{ disabled: boolean; user_id: number }> {
   const { data } = await axiosInstance.delete<{ disabled: boolean; user_id: number }>(
-    `/admin/users/patients/${userId}`
+    `/api/v1/admin/users/patients/${userId}`
   );
   return data;
 }
 
 export async function disableDoctor(userId: number): Promise<{ disabled: boolean; user_id: number }> {
   const { data } = await axiosInstance.delete<{ disabled: boolean; user_id: number }>(
-    `/admin/users/doctors/${userId}`
+    `/api/v1/admin/users/doctors/${userId}`
   );
   return data;
 }
 
 export async function disableLab(userId: number): Promise<{ disabled: boolean; user_id: number }> {
   const { data } = await axiosInstance.delete<{ disabled: boolean; user_id: number }>(
-    `/admin/users/labs/${userId}`
+    `/api/v1/admin/users/labs/${userId}`
   );
   return data;
 }
