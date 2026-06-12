@@ -39,7 +39,6 @@ import type { LabItem } from "@/services/admin/types";
 
 const initialCreate = {
   email: "",
-  password: "",
   first_name: "",
   last_name: "",
   phone: "",
@@ -49,6 +48,15 @@ const initialCreate = {
   lat: "",
   lng: "",
 };
+
+function getCreateLabSuccessMessage(response: {
+  data?: { email?: string; accessEmailSent?: boolean };
+}) {
+  const baseMessage = "Lab account created. Login email generated and access email sent.";
+  return response.data?.email
+    ? `${baseMessage} Generated login email: ${response.data.email}.`
+    : baseMessage;
+}
 
 const initialEdit = {
   first_name: "",
@@ -100,7 +108,6 @@ export default function Laboratories() {
   const submitCreate = async () => {
     if (
       !createForm.email ||
-      !createForm.password ||
       !createForm.first_name ||
       !createForm.last_name ||
       !createForm.phone ||
@@ -111,9 +118,8 @@ export default function Laboratories() {
       return;
     }
     try {
-      await createLab({
+      const response = await createLab({
         email: createForm.email,
-        password: createForm.password,
         first_name: createForm.first_name,
         last_name: createForm.last_name,
         phone: createForm.phone,
@@ -123,7 +129,12 @@ export default function Laboratories() {
         lat: createForm.lat ? Number(createForm.lat) : undefined,
         lng: createForm.lng ? Number(createForm.lng) : undefined,
       });
-      toast.success("Lab account created");
+      toast.success(getCreateLabSuccessMessage(response));
+      if (response.data?.accessEmailSent === false) {
+        toast.warning(
+          "Account was created, but the access email failed to send. Please check backend email configuration."
+        );
+      }
       setCreateOpen(false);
       setCreateForm(initialCreate);
       await loadData();
@@ -315,26 +326,22 @@ export default function Laboratories() {
       </div>
 
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Create Laboratory</DialogTitle>
-            <DialogDescription>Create lab account and lab profile</DialogDescription>
-          </DialogHeader>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
-            <div className="space-y-2">
-              <Label>Email *</Label>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Create Laboratory</DialogTitle>
+              <DialogDescription>Create lab account and lab profile</DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
+              <div className="space-y-2">
+              <Label>Recipient Email *</Label>
+              <p className="text-xs text-muted-foreground">
+                This email will receive the generated login email and temporary password. The login
+                email will be generated automatically by the system.
+              </p>
               <Input
                 type="email"
                 value={createForm.email}
                 onChange={(e) => setCreateForm((prev) => ({ ...prev, email: e.target.value }))}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Password *</Label>
-              <Input
-                type="password"
-                value={createForm.password}
-                onChange={(e) => setCreateForm((prev) => ({ ...prev, password: e.target.value }))}
               />
             </div>
             <div className="space-y-2">

@@ -84,7 +84,6 @@ export interface UsersQuery {
 
 export interface CreateDoctorPayload {
   email: string;
-  password: string;
   first_name: string;
   last_name: string;
   phone: string;
@@ -103,7 +102,6 @@ export interface CreateDoctorPayload {
 
 export interface CreateLabPayload {
   email: string;
-  password: string;
   first_name: string;
   last_name: string;
   phone: string;
@@ -112,6 +110,22 @@ export interface CreateLabPayload {
   lab_phone?: string;
   lat?: number;
   lng?: number;
+}
+
+export interface CreateAccountData {
+  user_id?: number;
+  doctor_id?: number;
+  lab_id?: number;
+  email?: string;
+  role?: string;
+  accessEmailSent?: boolean;
+  mustChangePassword?: boolean;
+}
+
+export interface CreateAccountResponse {
+  success?: boolean;
+  message?: string;
+  data?: CreateAccountData;
 }
 
 export interface StaticPagesQuery {

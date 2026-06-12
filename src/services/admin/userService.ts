@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/services/api/axiosInstance";
 import {
+  type CreateAccountResponse,
   type CreateDoctorPayload,
   type CreateLabPayload,
   type DoctorItem,
@@ -37,13 +38,13 @@ export async function listLabs(
   return data;
 }
 
-export async function createDoctor(payload: CreateDoctorPayload) {
-  const { data } = await axiosInstance.post("/api/v1/admin/users/doctors", payload);
+export async function createDoctor(payload: CreateDoctorPayload): Promise<CreateAccountResponse> {
+  const { data } = await axiosInstance.post<CreateAccountResponse>("/api/v1/admin/users/doctors", payload);
   return data;
 }
 
-export async function createLab(payload: CreateLabPayload) {
-  const { data } = await axiosInstance.post("/api/v1/admin/users/labs", payload);
+export async function createLab(payload: CreateLabPayload): Promise<CreateAccountResponse> {
+  const { data } = await axiosInstance.post<CreateAccountResponse>("/api/v1/admin/users/labs", payload);
   return data;
 }
 
